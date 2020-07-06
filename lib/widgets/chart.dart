@@ -23,7 +23,8 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 1,
       margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-      child: Padding(
+      child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,7 +33,7 @@ class Chart extends StatelessWidget {
             Card(
               elevation: 1,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 color: Colors.white,
                 child: Column(
                   children: <Widget>[
@@ -69,7 +70,7 @@ class Chart extends StatelessWidget {
               elevation: 1,
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Column(
                   children: <Widget>[
                     Text(

@@ -4,8 +4,9 @@ import 'package:quiz_app/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function removetx;
 
-  TransactionList(this.transactions);
+  TransactionList({this.transactions, this.removetx});
 
   @override
   Widget build(BuildContext context) {
@@ -45,68 +46,71 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(16),
-                              child: Text(
-                                transactions[index].amount > 0 ? "+" : "-",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20),
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: transactions[index].amount > 0
-                                    ? Colors.green[400]
-                                    : Colors.red[300],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  transactions[index].title,
+                return GestureDetector(
+                  onDoubleTap: () => removetx(transactions[index].id),
+                  child: Card(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                child: Text(
+                                  transactions[index].amount > 0 ? "+" : "-",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20),
                                 ),
-                                SizedBox(
-                                  height: 6,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: transactions[index].amount > 0
+                                      ? Colors.green[400]
+                                      : Colors.red[300],
                                 ),
-                                Text(
-                                  DateFormat.yMMMMd("en_US")
-                                      .add_jm()
-                                      .format(transactions[index].date),
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          child: Text(
-                            " \$ " +
-                                transactions[index].amount.abs().toString(),
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    transactions[index].title,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18),
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Text(
+                                    DateFormat.yMMMMd("en_US")
+                                        .add_jm()
+                                        .format(transactions[index].date),
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        )
-                      ],
+                          Container(
+                            child: Text(
+                              " \$ " +
+                                  transactions[index].amount.abs().toString(),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );

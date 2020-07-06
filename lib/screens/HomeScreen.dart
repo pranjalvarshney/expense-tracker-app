@@ -25,6 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _removeTransaction(String id) {
+    userTransactions.map((tx) {
+      if (tx.id == id) {
+        setState(() {
+          userTransactions.remove(tx);
+        });
+      }
+    }).toList();
+  }
+
   void _startAddnew(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -46,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.more_vert,
+                Icons.refresh,
                 color: Colors.white,
               ))
         ],
@@ -56,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             TotalBalance(userTransactions),
             Chart(userTransactions),
-            TransactionList(userTransactions)
+            TransactionList(
+              transactions: userTransactions,
+              removetx: _removeTransaction,
+            )
           ],
         ),
       ),
