@@ -14,7 +14,7 @@ class _NewTransactionState extends State<NewTransaction> {
     final ntitle = titleInputController.text;
     final namount = double.parse(amountInputController.text);
 
-    if (ntitle.isEmpty || namount <= 0) return null;
+    if (ntitle.isEmpty) return null;
     widget.addNewTx(ntitle, namount);
     Navigator.of(context).pop();
   }
@@ -27,7 +27,9 @@ class _NewTransactionState extends State<NewTransaction> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
+      margin: EdgeInsets.all(10),
       child: Container(
+        padding: EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             TextField(
@@ -44,8 +46,12 @@ class _NewTransactionState extends State<NewTransaction> {
                 ),
                 controller: amountInputController,
                 onSubmitted: (_) => submitData,
-                keyboardType: TextInputType.number),
-            FlatButton(
+                keyboardType: TextInputType.numberWithOptions(signed: true)),
+            SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              padding: EdgeInsets.all(10),
               child: Text(
                 "Add Transaction",
                 style: TextStyle(color: Colors.white),

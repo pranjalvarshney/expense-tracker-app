@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/models/transaction.dart';
 import 'package:quiz_app/widgets/NewTransaction.dart';
 import 'package:quiz_app/widgets/TransactionList.dart';
+import 'package:quiz_app/widgets/chart.dart';
+import 'package:quiz_app/widgets/total.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,11 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Transaction> userTransactions = [
-    Transaction(id: "t1", title: "Shoes", amount: 50, date: DateTime.now()),
-    Transaction(id: "t2", title: "Carpet", amount: 30, date: DateTime.now()),
-    Transaction(id: "t3", title: "Watch", amount: 100, date: DateTime.now())
-  ];
+  final List<Transaction> userTransactions = [];
 
   void _addNewTransaction(String newtitle, double newamount) {
     final newTx = Transaction(
@@ -39,22 +37,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 8,
         title: Text(
           "Home",
           style: TextStyle(color: Colors.white),
         ),
-        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[TransactionList(userTransactions)],
+          children: <Widget>[
+            TotalBalance(userTransactions),
+            Chart(userTransactions),
+            TransactionList(userTransactions)
+          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Text(
-          "+",
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          "Create",
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+              fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+        ),
+        icon: Icon(
+          Icons.add,
+          color: Colors.white,
         ),
         onPressed: () => _startAddnew(context),
       ),
