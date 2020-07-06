@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Transaction> userTransactions = [];
+  List<Transaction> userTransactions = [];
 
   void _addNewTransaction(String newtitle, double newamount) {
     final newTx = Transaction(
@@ -22,6 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       userTransactions.add(newTx);
+    });
+  }
+
+  void _removeAllTx() {
+    setState(() {
+      userTransactions = [];
     });
   }
 
@@ -54,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: <Widget>[
           IconButton(
-              onPressed: () {},
+              onPressed: _removeAllTx,
               icon: Icon(
                 Icons.refresh,
                 color: Colors.white,
