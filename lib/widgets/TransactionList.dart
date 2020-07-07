@@ -35,9 +35,17 @@ class TransactionList extends StatelessWidget {
                 ),
                 SizedBox(height: 0),
                 Text(
-                  "Click + to create transactions",
+                  "Click + to create transaction",
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400),
+                ),
+                SizedBox(height: 0),
+                Text(
+                  "Double-tap to remove your transaction",
+                  style: TextStyle(
+                      fontSize: 14,
                       color: Colors.grey,
                       fontWeight: FontWeight.w400),
                 )
@@ -54,7 +62,7 @@ class TransactionList extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Row(
